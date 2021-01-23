@@ -14,10 +14,17 @@
 
 <style>
     nav {
-		border-bottom: 1px solid rgba(0, 225, 255, 0.1);
+        border-bottom: 1px solid rgba(0, 225, 255, 0.1);
+        background-color: rgb(249, 254, 255);
 		font-weight: 300;
-		padding: 0 1em;
-	}
+        position: fixed;
+        top: 0 ;
+        overflow: hidden;
+        z-index: 100;
+        right: 0px;
+        left: 0px;
+    }
+    
 	ul {
 		margin: 0;
 		padding: 0;

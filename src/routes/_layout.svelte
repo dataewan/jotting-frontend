@@ -1,6 +1,7 @@
 <script>
 	import Nav from './../components/Nav.svelte';
 	export let segment;
+	import Prism from 'prismjs';
 </script>
 
 <style>
@@ -11,6 +12,7 @@
 		padding: 2em;
 		margin: 0 auto;
 		box-sizing: border-box;
+		margin-top: 30px;
 	}
 </style>
 

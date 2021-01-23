@@ -1,7 +1,6 @@
 <script>
 	import Nav from './../components/Nav.svelte';
 	export let segment;
-	import Prism from 'prismjs';
 </script>
 
 <style>

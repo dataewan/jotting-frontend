@@ -1,6 +1,10 @@
 <script context="module">
+    import hljs from "highlight.js"
 	import { selectedNote } from './../stores.js';
     export async function preload(page, session){
+
+
+
         let { notetitle } = page.params;
 
         notetitle = notetitle.replace(/.md$/, '')
@@ -19,6 +23,11 @@
     $: sections = note.sections
 
     onMount( () => {
+        document.querySelectorAll("pre code").forEach(block => {
+            hljs.highlightBlock(block)
+            console.log(block)
+
+        })
         $selectedNote = note.title
     })
 </script>
@@ -33,3 +42,5 @@
     {@html section.sectionhtml}
 </div>    
 {/each}
+
+<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@10.4.1/styles/agate.min.css">

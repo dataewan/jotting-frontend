@@ -6,14 +6,14 @@
 <script context="module">
     import hljs from "highlight.js"
     import katex from "katex"
-	import { selectedNote } from './../stores.js';
+	import { selectedNote, server } from './../stores.js';
     export async function preload(page, session){
 
         let { notetitle } = page.params;
 
         notetitle = notetitle.replace(/.md$/, '')
 
-        const res = await this.fetch(`http://localhost:8080/api/files/${notetitle}/contents`)
+        const res = await this.fetch(`${server}/api/files/${notetitle}/contents`)
         const note = await res.json();
 
         return {note}
@@ -22,6 +22,7 @@
 
 <script>
     import {onMount} from 'svelte';
+    import {changeImageSource} from '../images.js';
     export let note;
     let sections;
     $: sections = note.sections
@@ -29,8 +30,10 @@
     onMount( () => {
         document.querySelectorAll("pre code").forEach(block => {
             hljs.highlightBlock(block)
-            console.log(block)
+        })
 
+        document.querySelectorAll("img").forEach(image => {
+            changeImageSource(image, server)
         })
     
         var math = document.getElementsByClassName('math');
@@ -38,7 +41,6 @@
             const contents = math[i].textContent
                 .replace("\\[", "")
                 .replace("\\]", "")
-            //console.log(contents)
             katex.render(contents, math[i]);
         }
 

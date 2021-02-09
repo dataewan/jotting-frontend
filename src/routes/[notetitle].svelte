@@ -6,7 +6,7 @@
 <script context="module">
     import hljs from "highlight.js"
     import katex from "katex"
-	import { selectedNote, server } from './../stores.js';
+    import { selectedNote, server } from './../stores.js';
     export async function preload(page, session){
 
         let { notetitle } = page.params;
@@ -21,13 +21,37 @@
 </script>  
 
 <script>
+    import { stores } from '@sapper/app';
+    const { page } = stores();
     import {onMount} from 'svelte';
     import {changeImageSource} from '../images.js';
+    import Notelinks from "./Notelinks.svelte"
     export let note;
+
     let sections;
+    let linksPromise;
+
+    const tidyPath = (path) => {
+        if (!path){
+            return ""
+        }
+        return path
+            .replace(/.md$/, "")
+            .replace(/^\.\//, "")
+            .replace(/^\//, "")
+    }
+
+    $: $selectedNote = tidyPath($page.path)
     $: sections = note.sections
 
-    onMount( () => {
+    async function getLinks(){
+        const res = await fetch(`${server}/api/links`)
+        return res.json()
+    }
+
+    onMount(() => {
+        linksPromise = getLinks();
+
         document.querySelectorAll("pre code").forEach(block => {
             hljs.highlightBlock(block)
         })
@@ -41,12 +65,20 @@
             const contents = math[i].textContent
                 .replace("\\[", "")
                 .replace("\\]", "")
+                .replace("\\(", "")
+                .replace("\\)", "")
+
             katex.render(contents, math[i]);
         }
-
-        $selectedNote = note.title
     })
 </script>
+
+
+<style>
+  ul{
+    list-style: circle;
+  }
+</style>
 
 
 <h1>
@@ -58,5 +90,13 @@
     {@html section.sectionhtml}
 </div>    
 {/each}
+
+{#await linksPromise}
+<p>waiting</p>
+{:then links}
+<Notelinks {links} />
+{:catch error}
+<p style="color: red">{error.message}</p>
+{/await}
 
 <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@10.4.1/styles/agate.min.css">

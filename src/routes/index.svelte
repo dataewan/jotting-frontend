@@ -16,6 +16,10 @@
     .selected{
         background-color: aquamarine;
     }
+
+    ul{
+        list-style: none;
+    }
 </style>
 
 

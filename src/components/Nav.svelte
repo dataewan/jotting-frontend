@@ -64,5 +64,6 @@
 <ul>
     <li><a aria-current="{segment === undefined ? 'page' : undefined}" href="." >List</a></li>
     <li><a aria-current="{isnote ? 'page' : undefined}" href="./{$selectedNote}">View</a></li>
+    <li><a aria-current="{segment === "links" ? "page" : undefined}" href="./links">Links</a></li>
 </ul>
 </nav>

@@ -106,7 +106,7 @@
         function handleMouseover(d, i){
             $selectedNote = d.target.__data__.name
             svg.selectAll("circle")
-                .attr("fill", d => $selectedNote === d.name ? "aquamarine" : "grey")
+                .attr("fill", d => $selectedNote === d.name ? "coral" : "grey")
         }
 
         let nodes = svg
@@ -115,7 +115,7 @@
             .enter()
             .append("circle")
             .attr("r", 5)
-            .attr('fill', d => $selectedNote === d.name ? "aquamarine" : "grey")
+            .attr('fill', d => $selectedNote === d.name ? "coral" : "grey")
             .on("click", handleMouseover)
             .call(drag(simulation))
 

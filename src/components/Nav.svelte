@@ -14,7 +14,7 @@
 
 <style>
     nav {
-        border-bottom: 1px solid rgba(0, 225, 255, 0.1);
+        border-bottom: 1px solid coral;
         background-color: rgb(249, 254, 255);
 		font-weight: 300;
         position: fixed;
@@ -29,6 +29,7 @@
 		margin: 0;
 		padding: 0;
 	}
+  
 	ul::after {
 		content: '';
 		display: block;
@@ -48,8 +49,8 @@
 		position: absolute;
 		content: '';
 		width: calc(100% - 1em);
-		height: 2px;
-		background-color: aquamarine;
+		height: 5px;
+		background-color: coral;
 		display: block;
 		bottom: -1px;
 	}

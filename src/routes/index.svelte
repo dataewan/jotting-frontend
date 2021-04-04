@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>Notes</title>
+</svelte:head>
+
 <script context="module">
 	import { selectedNote } from './../stores.js';
     export async function preload(page, session){
@@ -9,7 +13,20 @@
 </script>
 
 <script>
+    const startsNumeric = d => {
+      if (d.match){
+        return d.match(/^\d+/)
+      }
+    }
+  
+    function compare(a, b){
+      if (startsNumeric(a.title) && startsNumeric(b.title)){
+        return b.title > a.title ? 1 : -1
+      }
+      return b.title < a.title ? 1 : -1
+    }
     export let notes;
+    notes = notes.sort(compare)
 </script>
 
 <style>

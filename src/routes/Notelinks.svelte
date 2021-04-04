@@ -74,7 +74,7 @@
     }
 
     a:hover{
-        background-color: aqua;
+        background-color: coral;
     }
 
     a.Markdown:before{

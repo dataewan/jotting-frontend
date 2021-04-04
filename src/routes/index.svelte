@@ -31,7 +31,7 @@
 
 <style>
     .selected{
-        background-color: aquamarine;
+        background-color: coral;
     }
 
     ul{

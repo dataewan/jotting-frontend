@@ -6,6 +6,8 @@ function lastPartURL(url) {
 export function changeImageSource(image, server) {
   let originalSource = image.src
   let imagePath = lastPartURL(originalSource)
-  image.src = `${server}/${imagePath}`
+  if (originalSource.includes("localhost")) {
+    image.src = `${server}/${imagePath}`
+  }
   return image
 }
